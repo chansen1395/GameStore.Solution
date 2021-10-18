@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GameStore.Models;
+@model IEnumerable<GameStore.Models.Customer>
+
+<h1>Customers for @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Customer customer in Model)
+    {
+      <li>@Html.ActionLink($"{customer.Description}", "Details", new { id = customer.CustomerId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No customers have been added yet!</h3>
+}
+
+<p>@Html.ActionLink("Add new customer", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GameStore.Models.Customer
+
+<h2>Edit</h2>
+
+<h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CustomerId)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+
+  @Html.LabelFor(model => model.Completed)
+  @Html.EditorFor(model => model.Completed)
+
+  @Html.Label("Select employee")
+  @Html.DropDownList("EmployeeId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

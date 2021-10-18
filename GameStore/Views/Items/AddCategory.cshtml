@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GameStore.Models.Customer
+
+<h2>Add a employee</h2>
+
+<h4>Add a employee to this task: @Html.DisplayFor(model => model.Description)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CustomerId)
+
+  @Html.Label("Select employee")
+  @Html.DropDownList("EmployeeId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
