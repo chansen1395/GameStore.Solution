@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using GameStore.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace GameStore.Controllers
 {
+  [Authorize(Roles = "Administrator")]
   public class EmployeesController : Controller
   {
     private readonly GameStoreContext _db;

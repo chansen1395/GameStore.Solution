@@ -4,12 +4,12 @@
 
 @model GameStore.Models.Customer
 
-<h4>Add a new task</h4>
+<h4>Add a new customer</h4>
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Description)
-  @Html.TextBoxFor(model => model.Description)
+  @Html.LabelFor(model => model.CustomerName)
+  @Html.TextBoxFor(model => model.CustomerName)
 
   @Html.Label("Select employee")
   @Html.DropDownList("EmployeeId")

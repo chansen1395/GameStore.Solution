@@ -4,19 +4,13 @@
 
 @model GameStore.Models.Customer
 
-<h2>Edit</h2>
+<h2>Add an employee</h2>
 
-<h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
+<h4>Add an employee to this customer: @Html.DisplayFor(model => model.CustomerName)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.CustomerId)
-
-  @Html.LabelFor(model => model.Description)
-  @Html.EditorFor(model => model.Description)
-
-  @Html.LabelFor(model => model.Completed)
-  @Html.EditorFor(model => model.Completed)
 
   @Html.Label("Select employee")
   @Html.DropDownList("EmployeeId")

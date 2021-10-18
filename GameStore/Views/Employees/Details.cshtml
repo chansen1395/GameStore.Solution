@@ -6,7 +6,7 @@
 
 <h2>Employee Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>@Html.DisplayNameFor(model => model.EmployeeName): @Html.DisplayFor(model => model.EmployeeName)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
@@ -18,7 +18,7 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Customer.Description</li>
+    <li>@join.Customer.CustomerName</li>
   }
   </ul>
 }

@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using GameStore.Models;
 using System.Threading.Tasks;
 using GameStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace GameStore.Controllers
 {
+  [AllowAnonymous]
   public class AccountController : Controller
   {
     private readonly GameStoreContext _db;
