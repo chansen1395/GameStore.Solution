@@ -71,7 +71,7 @@ namespace GameStore.Controllers
       return RedirectToAction("Index");
     }
     public ActionResult CheckoutGame(int id)
-    {
+    {  
       var thisGame = _db.Games.FirstOrDefault(game => game.GameId == id);
       ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "CustomerName");
       return View(thisGame);
@@ -80,6 +80,8 @@ namespace GameStore.Controllers
     [HttpPost]
     public ActionResult CheckoutGame(Game game, int CustomerId)
     {
+      var joinGame = _db.Games.FirstOrDefault(entry => entry.GameId == game.GameId);
+      joinGame.Inventory -= 1;
       if (CustomerId != 0)
       {
       _db.CustomerGame.Add(new CustomerGame() { CustomerId = CustomerId, GameId = game.GameId });

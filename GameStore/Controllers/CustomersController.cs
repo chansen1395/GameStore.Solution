@@ -129,11 +129,14 @@ namespace GameStore.Controllers
     }
 
     [HttpPost]
-    public ActionResult ReturnGame(int joinId)
+    public ActionResult ReturnGame(int joinId, int gameId)
     {
+      var joinGame = _db.Games.FirstOrDefault(entry => entry.GameId == gameId);
+      joinGame.Inventory += 1;
+
       var joinEntry = _db.CustomerGame.FirstOrDefault(entry => entry.CustomerGameId == joinId);
       joinEntry.Returned = true;
-      
+
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

@@ -4,12 +4,14 @@ div#footer {
 	left:0px;
 	width:100%;
 	color:#CCC;
-	background:#333;
+	background:rgb(214, 112, 112);
 	padding:8px;
 }
 
-button#bottom {
+.bottom {
 	height:100px;
 	width:250px;
-	font-size:20px;
+	font-size:25px;
+	font-weight: 700;
+	box-sizing: border-box;
 }
