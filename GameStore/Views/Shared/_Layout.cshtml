@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="~/css/styles.css">
   </head>
   <body>
-    @RenderBody()
-    @await Html.PartialAsync("Footer")
+    <div class = "container jumbotron">
+      @RenderBody()
+      @await Html.PartialAsync("Footer")
+      @await Html.PartialAsync("Bottom")
+    </div>
   </body>
 </html>

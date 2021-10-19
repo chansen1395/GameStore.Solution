@@ -32,23 +32,34 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new { id = join.Customer.CustomerId}, null)</li>
-    @using (Html.BeginForm("DeleteEmployee", "Customers"))
+    @if(!join.Returned)
     {
-      @Html.Hidden("joinId", @join.CustomerGameId)
-      <input type="submit" value="Delete"/>
+      <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new { id = join.Customer.CustomerId}, null)</li>
+      @using (Html.BeginForm("DeleteEmployee", "Customers"))
+      {
+        @Html.Hidden("joinId", @join.CustomerGameId)
+        <input type="submit" value="Return"/>
+      }
     }
   }
   </ul>
 }
+<br>
+  <h4>Customer checkout history:</h4>
+  <ol>
+  @foreach(var join in Model.JoinEntities)
+  {
+    @if(join.Returned)
+    {
+      <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new {id = join.Customer.CustomerId}, null)</li>
+    }
+  }
+  </ol>
 
-@* <p>@Html.ActionLink("Checkout game", "CheckoutGame", new { id = Model.GameId })</p> *@
-
-<p>@Html.ActionLink("See available games", "Index", "Games")</p>
-<p>@Html.ActionLink("Edit game", "Edit", new { id = Model.GameId })</p>
-
-
-
+<div id="footer">
+<button>@Html.ActionLink("See available games", "Index", "Games")</button>
+<button>@Html.ActionLink("Edit game", "Edit", new { id = Model.GameId })</button>
+</div>
 
 
         @* public string GameName { get; set; }

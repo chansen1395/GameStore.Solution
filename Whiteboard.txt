@@ -5,12 +5,17 @@ Stock/update/delete only if logged in
 *see overdue info
 
 Customers:
+return
+due date
+purchase history
+checkout - done
 create account - done
-rent/return
-due date, late fees(stretch)
+rent - done
+view list of available games(index) - done
+details(also have a link to checkout) - done
+late fees(stretch)
 buy(stretch)
-view list of available games(index) & details(also have a link to checkout) *search?
-checkout/purchase history
+search(stretch)
 
 
 

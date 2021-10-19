@@ -23,8 +23,10 @@
   @Html.EditorFor(model => model.RentPrice)
   <input type="submit" value="Add new Game" />
 }
-<p>@Html.ActionLink("Show all Games", "Index")</p>
 
+<div id="footer">
+<button>@Html.ActionLink("Show all Games", "Index")</button>
+</div>
         @* public string GameName { get; set; }
         public string Publisher { get; set; }
         public string Genre { get; set; }

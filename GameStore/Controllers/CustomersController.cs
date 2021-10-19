@@ -127,5 +127,15 @@ namespace GameStore.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult ReturnGame(int joinId)
+    {
+      var joinEntry = _db.CustomerGame.FirstOrDefault(entry => entry.CustomerGameId == joinId);
+      joinEntry.Returned = true;
+      
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
