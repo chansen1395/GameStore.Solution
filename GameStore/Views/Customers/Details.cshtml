@@ -29,6 +29,26 @@ else
   </ul>
 }
 
+@if(@Model.JoinCustomerGame.Count == 0)
+{
+  <p>This customer has not checked out any games.</p>
+}
+else
+{
+  <h4>Games checked out to the customer</h4>
+  <ul>
+  @foreach(var join in Model.JoinCustomerGame)
+  {
+    <li>@join.Game.GameName</li>
+    @using (Html.BeginForm("DeleteGame", "Customers"))
+    {
+      @Html.Hidden("joinId", @join.CustomerGameId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
 <p>@Html.ActionLink("Add a Employee", "AddEmployee", new { id = Model.CustomerId })</p>
 
 <p>@Html.ActionLink("Back to list", "Index")</p>

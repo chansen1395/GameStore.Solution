@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameStore.Controllers
 {
-  [Authorize(Roles = "Administrator")]
+  // [Authorize(Roles = "Administrator")]
   public class EmployeesController : Controller
   {
     private readonly GameStoreContext _db;

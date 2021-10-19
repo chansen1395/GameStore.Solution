@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GameStore.Models.Game
+
+<h2>Add a customer to a game (Checking a game out to customer)</h2>
+
+<h4>Add a customer to this game: @Html.DisplayFor(model => model.GameName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.GameId)
+
+  @Html.Label("Select customer")
+  @Html.DropDownList("CustomerId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

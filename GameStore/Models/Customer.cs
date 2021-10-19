@@ -13,9 +13,6 @@ namespace GameStore.Models
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public bool CustomerCheckout { get; set; }
-        public int CustomerPurchase { get; set; }
-        public DateTime CheckoutDate { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<CustomerEmployee> JoinEntities { get;}

@@ -37,7 +37,7 @@ namespace GameStore.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "Name");
+      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "EmployeeName");
       return View();
     }
 
@@ -70,7 +70,7 @@ namespace GameStore.Controllers
     public ActionResult Edit(int id)
     {
       var thisCustomer = _db.Customers.FirstOrDefault(customer => customer.CustomerId == id);
-      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "Name");
+      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "EmployeeName");
       return View(thisCustomer);
     }
 
@@ -89,7 +89,7 @@ namespace GameStore.Controllers
     public ActionResult AddEmployee(int id)
     {
       var thisCustomer = _db.Customers.FirstOrDefault(customer => customer.CustomerId == id);
-      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "Name");
+      ViewBag.EmployeeId = new SelectList(_db.Employees, "EmployeeId", "EmployeeName");
       return View(thisCustomer);
     }
 

@@ -1,0 +1,58 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GameStore.Models.Game
+
+<h2>Game Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.GameName): @Html.DisplayFor(model => model.GameName)</h3>
+<h5>@Html.DisplayNameFor(model => model.Publisher): @Html.DisplayFor(model => model.Publisher)</h5>
+<h5>@Html.DisplayNameFor(model => model.Genre): @Html.DisplayFor(model => model.Genre)</h5>
+<h5>@Html.DisplayNameFor(model => model.Inventory): @Html.DisplayFor(model => model.Inventory)</h5>
+<h5>@Html.DisplayNameFor(model => model.RentPrice): @Html.DisplayFor(model => model.RentPrice)</h5>
+
+@if(@Model.Inventory == 0)
+{
+  <p>No copies of this game are in stock currently.</p>
+}
+else
+{
+  <p>@Html.ActionLink("Checkout Game", "CheckoutGame", "Games", new { id = Model.GameId})</p>
+}
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>No Customers are renting this game.</p>
+}
+  
+else
+{
+  <h4>Customers renting this game:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new { id = join.Customer.CustomerId}, null)</li>
+    @using (Html.BeginForm("DeleteEmployee", "Customers"))
+    {
+      @Html.Hidden("joinId", @join.CustomerGameId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+@* <p>@Html.ActionLink("Checkout game", "CheckoutGame", new { id = Model.GameId })</p> *@
+
+<p>@Html.ActionLink("See available games", "Index", "Games")</p>
+<p>@Html.ActionLink("Edit game", "Edit", new { id = Model.GameId })</p>
+
+
+
+
+
+        @* public string GameName { get; set; }
+        public string Publisher { get; set; }
+        public string Genre { get; set; }
+        public int Inventory { get; set; }
+        public int RentPrice { get; set; } *@

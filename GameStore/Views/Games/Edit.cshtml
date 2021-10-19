@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@* @using GameStore.Models; *@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model GameStore.Models.Game
+
+<h2>Edit</h2>
+
+<h4>Edit this game: @Html.DisplayFor(model => model.GameName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.GameId)
+
+  @Html.LabelFor(model => model.GameName)
+  @Html.EditorFor(model => model.GameName)
+
+  @Html.LabelFor(model => model.Publisher)
+  @Html.EditorFor(model => model.Publisher)
+
+  @Html.LabelFor(model => model.Genre)
+  @Html.EditorFor(model => model.Genre)
+
+  @Html.LabelFor(model => model.Inventory)
+  @Html.EditorFor(model => model.Inventory)
+
+  @Html.LabelFor(model => model.RentPrice)
+  @Html.EditorFor(model => model.RentPrice)
+
+  <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>

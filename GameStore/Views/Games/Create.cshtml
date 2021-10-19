@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GameStore.Models.Game
+
+<h4>Add a new Game</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.GameName)
+  @Html.TextBoxFor(model => model.GameName)
+
+  @Html.LabelFor(model => model.Publisher)
+  @Html.TextBoxFor(model => model.Publisher)
+
+  @Html.LabelFor(model => model.Genre)
+  @Html.TextBoxFor(model => model.Genre)
+
+  @Html.LabelFor(model => model.Inventory)
+  @Html.EditorFor(model => model.Inventory)
+
+  @Html.LabelFor(model => model.RentPrice)
+  @Html.EditorFor(model => model.RentPrice)
+  <input type="submit" value="Add new Game" />
+}
+<p>@Html.ActionLink("Show all Games", "Index")</p>
+
+        @* public string GameName { get; set; }
+        public string Publisher { get; set; }
+        public string Genre { get; set; }
+        public int Inventory { get; set; }
+        public int RentPrice { get; set; } *@
