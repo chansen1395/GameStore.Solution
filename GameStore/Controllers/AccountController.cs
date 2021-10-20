@@ -16,6 +16,8 @@ namespace GameStore.Controllers
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
+    // private readonly RoleAdmin<IdentityRole> roleAdmin;
+
     public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, GameStoreContext db)
     {
       _userManager = userManager;
@@ -40,6 +42,8 @@ namespace GameStore.Controllers
         }
         else
         {
+        ModelState.AddModelError("password", "The email or password is incorrect");
+        ModelState.AddModelError("", "The email or password provided is incorrect.");
           return View();
         }
       }
@@ -80,26 +84,25 @@ namespace GameStore.Controllers
       return View();
     }
 
-    // [HttpPost]
-    // public async Task<ActionResult> Login(LoginViewModel model)
-    // {
-    //   Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-    //   if (result.Succeeded)
-    //   {
-    //     return RedirectToAction("Index");
-    //   }
-    //   else
-    //   {
-    //     return View();
-    //   }
-    // }
-
-    
-    // [HttpPost]
-    // public async Task<ActionResult> LogOff()
-    // {
-    //   await _signInManager.SignOutAsync();
-    //   return RedirectToAction("Index", "Home");
-    // }
+    [HttpPost]
+    public async Task<ActionResult> Login(LoginViewModel model)
+    {
+      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+      // string test = Request.Headers["Referer"].ToString();
+      // System.Console.WriteLine(test);
+      if (result.Succeeded)
+      {
+        // return Redirect(referrer);
+        return RedirectToAction("Index", "Home");
+        // return Redirect(model.PreviousUrl);
+        // return Redirect(Request.Headers["Referer"].ToString());
+      }
+      else
+      {
+        ModelState.AddModelError("password", "The email or password is incorrect");
+        ModelState.AddModelError("", "The email or password provided is incorrect.");
+        return View();
+      }
+    }
   }
 }

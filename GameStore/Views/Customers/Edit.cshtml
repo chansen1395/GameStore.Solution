@@ -15,9 +15,6 @@
   @Html.LabelFor(model => model.CustomerName)
   @Html.EditorFor(model => model.CustomerName)
 
-  @* @Html.LabelFor(model => model.Completed)
-  @Html.EditorFor(model => model.Completed) *@
-
   @Html.Label("Select employee")
   @Html.DropDownList("EmployeeId")
 
@@ -26,7 +23,3 @@
 <div id="footer">
   <button  class="bottom">@Html.ActionLink("Back to list", "Index")</button>
 </div>
-
-        @* public bool CustomerCheckout { get; set; }
-        public int CustomerPurchase { get; set; }
-        public DateTime CheckoutDate { get; set; } *@

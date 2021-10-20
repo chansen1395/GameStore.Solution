@@ -51,15 +51,15 @@ else
   <br>
     <h4>Customer checkout history:</h4>
     <ol>
-    @* @{ int historyCount = 0; } *@
+    @{ int historyCount = 0; }
     @foreach(var join in Model.JoinEntities)
     {
-      @* @if(join.Returned && (historyCount <=10)) *@
+      @if(join.Returned && (historyCount <=10))
       @if(join.Returned)
       {
         <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new {id = join.Customer.CustomerId}, null)</li>
       }
-      @* { historyCount ++; } *@
+      { historyCount ++; }
     }
     </ol>
 }

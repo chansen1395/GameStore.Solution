@@ -2,6 +2,9 @@
   Layout = "_Layout";
 }
 
+@using Microsoft.AspNetCore.Mvc
+@using System.Web
+
 @using GameStore.ViewModels
 
 @model LoginViewModel
@@ -11,13 +14,19 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
-
+    @Html.TextBoxFor(m => m.Email, new { required = "required"})
+    <br>
     @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
+    @Html.PasswordFor(m => m.Password, new { required = "required"})
+    @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+    <br>
+    @* <input type="hidden" name="PreviousUrl" value="@Model.PreviousUrl" /> *@
 
-    <input type="submit" value="Log in" class="btn btn-default" />
+    <input type="submit" value="Log in" class="btn btn-primary" />
 }
+
+@* @{ var request = HttpContext.Current.Request.Headers["Referer"].ToString(); } *@
+
 <div id="footer">
 <button class="bottom">@Html.ActionLink("Home", "Index", "Home")</button>
 </div>

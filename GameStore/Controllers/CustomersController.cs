@@ -13,13 +13,12 @@ using Microsoft.Extensions.Logging;
 
 namespace GameStore.Controllers
 {
-  [Authorize] //new line
+  [Authorize]
   public class CustomersController : Controller
   {
     private readonly GameStoreContext _db;
     private readonly UserManager<ApplicationUser> _userManager; //new line
 
-    //updated constructor
     public CustomersController(UserManager<ApplicationUser> userManager, GameStoreContext db)
     {
       _userManager = userManager;

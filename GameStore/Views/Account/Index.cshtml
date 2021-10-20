@@ -2,6 +2,8 @@
   Layout = "_Layout";
 }
 
+@using Microsoft.AspNetCore.Mvc
+@using System.Web
 @using System.Security.Claims
 @using GameStore.ViewModels
 @model LoginViewModel
@@ -20,17 +22,18 @@
 else
 {
     @using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email, new { required = "required"})
-    <br>
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password, new { required = "required"})
-    <br>
-    <input type="submit" value="Login" class="btn btn-primary" />
-}
+    {
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { required = "required"})
+        <br>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { required = "required"})
+        @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+
+        <br>
+        <input type="submit" value="Login" class="btn btn-primary" />
+    }
     <button class = "btn btn-warning">@Html.ActionLink("Register", "Register")</button>
-    @* <p>@Html.ActionLink("Log in", "Login")</p> *@
 }
 <div id="footer">
 <button class="bottom">@Html.ActionLink("Home", "Index", "Home")</button>

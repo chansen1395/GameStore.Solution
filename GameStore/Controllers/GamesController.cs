@@ -46,9 +46,8 @@ namespace GameStore.Controllers
     {
       var thisGame = _db.Games
         .Include(game => game.JoinEntities)
-        .ThenInclude(join => join.Customer).Take(5).ToList()
+        .ThenInclude(join => join.Customer)
         .FirstOrDefault(game => game.GameId == id);
-      // ViewBag.CustomerGame = new SelectList(_db.CustomerGame, "GameId", "Returned");
       return View(thisGame);
     }
     public ActionResult Edit(int id)
