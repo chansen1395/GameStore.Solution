@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using System.Security.Claims
 @model GameStore.Models.Game
 
 <h2>Game Details</h2>
@@ -21,42 +22,47 @@ else
   <p>@Html.ActionLink("Checkout Game", "CheckoutGame", "Games", new { id = Model.GameId})</p>
 }
 
-@if(@Model.JoinEntities.Count == 0)
+@if (User.Identity.IsAuthenticated)
 {
-  <p>No Customers are renting this game.</p>
-}
-
-else
-{
-  <h4>Customers renting this game:</h4>
-  <ul>
-  @foreach(var join in Model.JoinEntities)
+  @if(@Model.JoinEntities.Count == 0)
   {
-    @if(!join.Returned)
+    <p>No Customers are renting this game.</p>
+  }
+
+  else
+  {
+    <h4>Customers renting this game:</h4>
+    <ul>
+    @foreach(var join in Model.JoinEntities)
     {
-      <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Games", new { id = join.Customer.CustomerId}, null)</li>
-      @using (Html.BeginForm("ReturnGame", "Customers"))
+      @if(!join.Returned)
       {
-        @Html.Hidden("joinId", @join.CustomerGameId)
-        @Html.Hidden("gameId", @join.GameId)
-        <input type="submit" value="Return"/>
+        <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new { id = join.Customer.CustomerId}, null)</li>
+        @using (Html.BeginForm("ReturnGame", "Customers"))
+        {
+          @Html.Hidden("joinId", @join.CustomerGameId)
+          @Html.Hidden("gameId", @join.GameId)
+          <input type="submit" value="Return"/>
+        }
       }
     }
+    </ul>
   }
-  </ul>
-}
-<br>
-  <h4>Customer checkout history:</h4>
-  <ol>
-  @foreach(var join in Model.JoinEntities)
-  {
-    @if(join.Returned)
+  <br>
+    <h4>Customer checkout history:</h4>
+    <ol>
+    @* @{ int historyCount = 0; } *@
+    @foreach(var join in Model.JoinEntities)
     {
-      <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new {id = join.Customer.CustomerId}, null)</li>
+      @* @if(join.Returned && (historyCount <=10)) *@
+      @if(join.Returned)
+      {
+        <li>@Html.ActionLink($"{join.Customer.CustomerName}", "Details", "Customers", new {id = join.Customer.CustomerId}, null)</li>
+      }
+      @* { historyCount ++; } *@
     }
-  }
-  </ol>
-
+    </ol>
+}
 <div id="footer">
   <button class="bottom">@Html.ActionLink("See available games", "Index", "Games")</button>
   <button class="bottom">@Html.ActionLink("Edit game", "Edit", new { id = Model.GameId })</button>

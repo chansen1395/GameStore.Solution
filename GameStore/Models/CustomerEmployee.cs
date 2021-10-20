@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace GameStore.Models
 {
   public class CustomerEmployee

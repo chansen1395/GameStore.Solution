@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameStore.Controllers
 {
+  [Authorize]
   public class GamesController : Controller
   {
     private readonly GameStoreContext _db;
@@ -20,15 +21,18 @@ namespace GameStore.Controllers
     {
       _db = db;
     }
+    [AllowAnonymous]
     public ActionResult Index()
     {
       List<Game> model = _db.Games.ToList();
       return View(model);
     }
+
     public ActionResult Create()
     {
       return View();
     }
+
     [HttpPost]
     public ActionResult Create(Game game)
     {
@@ -36,11 +40,13 @@ namespace GameStore.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisGame = _db.Games
         .Include(game => game.JoinEntities)
-        .ThenInclude(join => join.Customer)
+        .ThenInclude(join => join.Customer).Take(5).ToList()
         .FirstOrDefault(game => game.GameId == id);
       // ViewBag.CustomerGame = new SelectList(_db.CustomerGame, "GameId", "Returned");
       return View(thisGame);
@@ -81,13 +87,20 @@ namespace GameStore.Controllers
     public ActionResult CheckoutGame(Game game, int CustomerId)
     {
       var joinGame = _db.Games.FirstOrDefault(entry => entry.GameId == game.GameId);
-      joinGame.Inventory -= 1;
-      if (CustomerId != 0)
+      if(joinGame.Inventory >= 1)
       {
-      _db.CustomerGame.Add(new CustomerGame() { CustomerId = CustomerId, GameId = game.GameId });
+        joinGame.Inventory -= 1;
+        if (CustomerId != 0)
+        {
+        _db.CustomerGame.Add(new CustomerGame() { CustomerId = CustomerId, GameId = game.GameId });
+        }
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       }
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      else
+      {
+        return RedirectToAction("Index");
+      }
     }
   }
 }

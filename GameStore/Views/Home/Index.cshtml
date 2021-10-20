@@ -1,9 +1,13 @@
 @{
   Layout = "_Layout";
 }
+<nav class="navbar fixed-top navbar-light" style="background-color: #e3f2fd;">
+  <p>@Html.ActionLink("See available games", "Index", "Games")</p>
+</nav>
+
 
 <h1>Welcome to the Game Store!</h1>
 <p>@Html.ActionLink("See available games", "Index", "Games")</p>
 <p>@Html.ActionLink("See all customers", "Index", "Customers")</p>
 <p>@Html.ActionLink("See all employees", "Index", "Employees")</p>
-<p>@Html.ActionLink("Create an account", "Index", "Account")</p>
+<p>@Html.ActionLink("Register or Login", "Index", "Account")</p>

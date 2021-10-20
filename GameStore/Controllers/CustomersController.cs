@@ -26,7 +26,6 @@ namespace GameStore.Controllers
       _db = db;
     }
 
-    // [AllowAnonymous]
     public async Task<ActionResult> Index()
     {
         var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -57,7 +56,6 @@ namespace GameStore.Controllers
     return RedirectToAction("Index");
     }
 
-    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisCustomer = _db.Customers

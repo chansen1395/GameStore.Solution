@@ -12,12 +12,16 @@
 {
     @Html.LabelFor(user => user.Email)
     @Html.TextBoxFor(user=> user.Email)
-
+    <br>
     @Html.LabelFor(user=> user.Password)
     @Html.PasswordFor(user=> user.Password)
-
+    <br>
     @Html.LabelFor(user=> user.ConfirmPassword)
     @Html.PasswordFor(user=> user.ConfirmPassword)
-
-    <input type="submit" value="Register" />
+    <br>
+    <input type="submit" value="Register" class="btn btn-success"/>
 }
+
+<div id="footer">
+<button class="bottom">@Html.ActionLink("Home", "Index", "Home")</button>
+</div>
